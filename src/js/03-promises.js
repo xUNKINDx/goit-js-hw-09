@@ -8,15 +8,11 @@ function onFormSubmitHandler(event) {
     elements: { delay, step, amount },
   } = event.currentTarget;
 
-  createPromises(
-    parseInt(delay.value),
-    parseInt(step.value),
-    parseInt(amount.value)
-  );
-}
+  let currentDelay = parseInt(delay.value);
+  const stepValue = parseInt(step.value);
+  const amountValue = parseInt(amount.value);
 
-function createPromises(currentDelay, step, amount) {
-  for (let currentPosition = 1; currentPosition <= amount; currentPosition++) {
+  for (let currentPosition = 1; currentPosition <= amountValue; currentPosition++) {
     createPromise(currentPosition, currentDelay)
       .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -24,7 +20,7 @@ function createPromises(currentDelay, step, amount) {
       .catch(({ position, delay }) => {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
       });
-    currentDelay += step;
+    currentDelay += stepValue;
   }
 }
 
