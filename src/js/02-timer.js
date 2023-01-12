@@ -46,6 +46,10 @@ flatpickr(refs.dateInput, options);
 refs.startButton.addEventListener('click', onStartButtonClickHandler);
 
 function onStartButtonClickHandler(event) {
+  if (timerId != null) {
+    clearInterval(timerId);
+  }
+
   event.currentTarget.disabled = true;
   const currentDate = new Date();
   timeLeftMs = selectedUnixDateTime - currentDate.getTime();
@@ -67,7 +71,7 @@ function displayTime() {
 }
 
 function addLeadingZero(value) {
-    return value.toString().padStart(2, "0");
+  return value.toString().padStart(2, '0');
 }
 
 function convertMs(ms) {
